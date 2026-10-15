@@ -1,0 +1,40 @@
+:root{--bg:#f6f7fb;--card:#fff;--ink:#1b2033;--mut:#5d647a;--line:#e1e4ee;--pri:#4f46e5;--pri2:#eef0ff;--ok:#15803d;--okbg:#e8f7ee;--bad:#b91c1c;--badbg:#fdecec;--warn:#b45309}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1220;--card:#181c30;--ink:#e8eaf6;--mut:#9aa1bd;--line:#2a3050;--pri:#8b93ff;--pri2:#23284a;--ok:#4ade80;--okbg:#10301e;--bad:#f87171;--badbg:#3a1618;--warn:#fbbf24}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+a{color:var(--pri);text-decoration:none}a:hover{text-decoration:underline}
+header.top{background:var(--card);border-bottom:1px solid var(--line)}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+.brand{font-weight:800;font-size:18px;color:var(--ink)}.brand span{color:var(--pri)}
+main{padding:28px 0 60px}h1{font-size:28px;margin:0 0 6px}h2{font-size:20px;margin:28px 0 12px}
+.sub{color:var(--mut);margin:0 0 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:block;color:var(--ink)}
+a.card:hover{border-color:var(--pri);text-decoration:none}
+.card h3{margin:0 0 4px;font-size:17px}.card p{margin:0;color:var(--mut);font-size:14px}
+.tag{display:inline-block;font-size:12px;padding:2px 8px;border-radius:99px;background:var(--pri2);color:var(--pri);margin-top:10px}
+.tag.soon{background:var(--line);color:var(--mut)}.tag.best{background:var(--okbg);color:var(--ok)}
+.card.dim{opacity:.6}
+.btn{display:inline-block;background:var(--pri);color:#fff;border:0;border-radius:8px;padding:9px 16px;font:inherit;font-weight:600;cursor:pointer}
+.btn:hover{text-decoration:none;filter:brightness(1.1)}.btn.ghost{background:transparent;color:var(--pri);border:1px solid var(--pri)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.opt{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:var(--card);color:var(--ink);border:1.5px solid var(--line);border-radius:10px;padding:11px 14px;margin:8px 0;font:inherit;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--pri)}.opt .l{font-weight:700;color:var(--mut);min-width:20px}
+.opt.sel{border-color:var(--pri);background:var(--pri2)}.opt.right{border-color:var(--ok);background:var(--okbg)}.opt.wrong{border-color:var(--bad);background:var(--badbg)}
+.opt:disabled{cursor:default}
+.qtext{font-size:17px;margin:8px 0 14px}.qmeta{color:var(--mut);font-size:13px}
+.bar{height:6px;background:var(--line);border-radius:9px;overflow:hidden;margin:10px 0 18px}.bar i{display:block;height:100%;background:var(--pri)}
+.sol{border-left:4px solid var(--pri);background:var(--card);border-radius:8px;padding:12px 16px;margin:14px 0}
+.sol h4{margin:0 0 8px}.sol ol{margin:0;padding:0;list-style:none}
+.sol li{margin:8px 0;padding-left:68px;position:relative}.sol li b.st{position:absolute;left:0;color:var(--pri);white-space:nowrap}
+.sol .fin{margin-top:10px;font-weight:700;color:var(--ok)}
+.verdict{font-weight:700;margin:10px 0}.verdict.ok{color:var(--ok)}.verdict.no{color:var(--bad)}
+.score{font-size:44px;font-weight:800;color:var(--pri)}
+.rev{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:6px 16px;margin:14px 0}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.chip{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;font:inherit}
+.chip.done{background:var(--pri2);border-color:var(--pri)}.chip.cur{outline:2px solid var(--pri)}
+.field{margin:12px 0}.field label{display:block;font-weight:600;margin-bottom:4px}select,input[type=number]{font:inherit;padding:7px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+footer{color:var(--mut);font-size:13px;text-align:center;padding:24px 16px}
+.katex-display{overflow-x:auto;overflow-y:hidden}
+@media(max-width:560px){.sol li{padding-left:0}.sol li b.st{position:static;display:block}}

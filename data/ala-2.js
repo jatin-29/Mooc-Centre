@@ -1,0 +1,35 @@
+(function(){const R=String.raw;
+const A=[['1+2j','-1-3j','2+3j'],['5-2j','-1-5j','-2-4j'],['-6+2j','-3-j','2+j']];
+const B=[['3-2j','-2+j','-4-2j'],['1+3j','-3+2j','4-j'],['-5+3j','3+2j','-1-4j']];
+addSet('ala',2,{title:'Inverse, rank, Gaussian elimination, Hermitian transpose',questions:[
+{q:R`Let $\mathbf C$ be the matrix of cofactors of $\mathbf A$. Then $\mathbf A^{-1}$ is`,
+ o:[R`$\mathbf C/|\mathbf A|$`,R`$\mathrm{adj}(\mathbf A)\,|\mathbf A|$`,R`$\dfrac{\mathrm{adj}(\mathbf A)}{|\mathbf A|}=\dfrac{\mathbf C^T}{|\mathbf A|}$`,R`$\mathbf C^T|\mathbf A|$`],a:2,
+ s:[R`The adjoint (adjugate) is the transpose of the cofactor matrix: $\mathrm{adj}(\mathbf A)=\mathbf C^T$.`,R`The inverse is the adjugate divided by the determinant: $\mathbf A^{-1}=\mathrm{adj}(\mathbf A)/|\mathbf A|$.`]},
+{q:R`The conjugate (Hermitian) transpose of $$${M(A)}$$ is`,
+ o:[R`$${M([['1+2j','5-2j','-6+2j'],['-1-3j','-1-5j','-3-j'],['2+3j','-2-4j','2+j']])}$`,R`$${M([['1-2j','-1+3j','2-3j'],['5+2j','-1+5j','-2+4j'],['-6-2j','-3+j','2-j']])}$`,R`$${M([['1-2j','5+2j','-6-2j'],['-1+3j','-1+5j','-3+j'],['2-3j','-2+4j','2-j']])}$`,R`$${M([['-1+2j','-5-2j','6+2j'],['1-3j','1-5j','3-j'],['-2+3j','2-4j','-2+j']])}$`],a:2,
+ s:[R`$\mathbf A^H=(\mathbf A^*)^T$: do two things - transpose AND conjugate every entry.`,R`Transpose: row 1 of $\mathbf A$ becomes column 1, etc.`,R`Conjugate (flip the sign of each imaginary part): e.g. $5-2j\to5+2j$ and $-6+2j\to-6-2j$ in the first row.`,R`Option A only transposes, B only conjugates, D negates everything - all incorrect.`]},
+{q:R`The rank of $\mathbf A=$ $${M([[-2,1,-3],[-1,5,7],[-3,-3,-13]])}$ is`,
+ o:[R`1`,R`3`,R`2`,R`0`],a:2,
+ s:[R`$R_2\to R_2-\tfrac12R_1$: $[0,\ \tfrac92,\ \tfrac{17}2]$.`,R`$R_3\to R_3-\tfrac32R_1$: $[0,\ -\tfrac92,\ -\tfrac{17}2]$.`,R`$R_3\to R_3+R_2$: $[0,0,0]$ - a zero row.`,R`Only 2 non-zero rows remain in echelon form, so rank $=2$.`]},
+{q:R`For $\bar{\mathbf u}(f)=\tfrac1N[1,e^{j2\pi f},\dots,e^{j2\pi(N-1)f}]^T$, $\|\bar{\mathbf u}(f)\|^2=$`,
+ o:[R`$1/N$`,R`$N$`,R`$1$`,R`$1/N^2$`],a:0,
+ s:[R`Each entry has magnitude $\frac1N\cdot|e^{j\theta}|=\frac1N$, so each contributes $\frac1{N^2}$.`,R`There are $N$ entries: $\|\bar{\mathbf u}\|^2=N\cdot\frac1{N^2}=\frac1N$.`]},
+{q:R`For $\mathbf u=[u_1,\dots,u_n]^T$ and $\mathbf v=[v_1,\dots,v_n]^T$, the quantity $\mathbf v^H\mathbf u$ equals`,
+ o:[R`$u_1v_1^*+u_2v_2^*+\cdots+u_nv_n^*$`,R`$u_1^*v_1+\cdots+u_n^*v_n$`,R`$u_1v_1+\cdots+u_nv_n$`,R`$|u_1||v_1|+\cdots+|u_n||v_n|$`],a:0,
+ s:[R`$\mathbf v^H=[v_1^*,\dots,v_n^*]$ (a conjugated row).`,R`Multiply by the column $\mathbf u$: $\mathbf v^H\mathbf u=\sum_i v_i^*u_i=\sum_i u_iv_i^*$.`]},
+{q:R`Which of these conditions imply that an $n\times n$ matrix $\mathbf A$ is invertible? (I) $|\mathbf A|\ne0$ (II) $\mathrm{rank}(\mathbf A)=n$ (III) the columns of $\mathbf A$ are linearly independent`,
+ o:[R`All of these`,R`Only I`,R`Only I and II`,R`Only II and III`],a:0,
+ s:[R`$|\mathbf A|\neq0$ means $\mathbf A^{-1}=\mathrm{adj}(\mathbf A)/|\mathbf A|$ exists.`,R`Rank $n$ means full rank: the reduced echelon form is $\mathbf I$, so $\mathbf A$ is invertible.`,R`Independent columns means rank $n$ (the null space is only $\{\mathbf 0\}$).`,R`All three are equivalent ways to say "invertible".`]},
+{q:R`The rank of $\mathbf A=$ $${M([[2,-3,1],[1,-2,5],[-4,6,-7]])}$ is`,
+ o:[R`2`,R`3`,R`1`,R`0`],a:1,
+ s:[R`$R_2\to2R_2-R_1$: $[0,\,-1,\,9]$.`,R`$R_3\to R_3+2R_1$: $[0,\,0,\,-5]$.`,R`Echelon form $\begin{bmatrix}2&-3&1\\0&-1&9\\0&0&-5\end{bmatrix}$ has 3 non-zero pivots, so rank $=3$.`]},
+{q:R`The rank of a matrix equals`,
+ o:[R`the number of non-zero entries`,R`the maximum number of linearly independent columns`,R`the number of columns, always`,R`the sum of the diagonal entries`],a:1,
+ s:[R`Rank is the dimension of the column space.`,R`This equals the maximum number of linearly independent columns (and also of independent rows).`]},
+{q:R`The conjugate transpose of $$${M(B)}$$ is`,
+ o:[R`$${M([['3+2j','1-3j','-5-3j'],['-2-j','-3-2j','3-2j'],['-4+2j','4+j','-1+4j']])}$`,R`$${M([['3-2j','1+3j','-5+3j'],['-2+j','-3+2j','3+2j'],['-4-2j','4-j','-1-4j']])}$`,R`$${M([['3+2j','-2-j','-4+2j'],['1-3j','-3-2j','4+j'],['-5-3j','3-2j','-1+4j']])}$`,R`$${M([['-3+2j','-1+3j','5-3j'],['2-j','3-2j','-3-2j'],['4+2j','-4+j','1+4j']])}$`],a:0,
+ s:[R`Transpose first: the first column of the answer is the first row of $\mathbf A$: $[3-2j,\,-2+j,\,-4-2j]$.`,R`Now conjugate each entry: $[3+2j,\,-2-j,\,-4+2j]$ - this goes down column 1.`,R`Do the same for the other rows. The first row of $\mathbf A^H$ is the conjugate of column 1 of $\mathbf A$: $[3+2j,\,1-3j,\,-5-3j]$.`,R`Option B is only the transpose, C only the conjugate.`]},
+{q:R`The adjoint of $\mathbf A$, written $\mathrm{adj}(\mathbf A)$, is given by`,
+ o:[R`$\mathbf C$`,R`$\mathbf C^T$`,R`$\mathbf C^{-1}$`,R`$|\mathbf A|\,\mathbf C$`],a:1,
+ s:[R`Form the cofactor matrix $\mathbf C$ with $C_{ij}=(-1)^{i+j}M_{ij}$.`,R`The adjoint (adjugate) is its transpose: $\mathrm{adj}(\mathbf A)=\mathbf C^T$.`]}
+]});})();
