@@ -5,8 +5,8 @@ window.COURSES = [
    desc:'Vectors, matrices, SVD, LMMSE, MIMO/OFDM, PCA and sparse recovery. All 11 weekly assignments.', sets:{}},
   {id:'wildlife', title:'Wildlife Ecology', short:'WE', live:true, count:11, qs:110, unit:'Week', prefix:'W', brief:true, cover:'assets/cover-wildlife.svg', tag:'Ecology · Conservation · Field methods',
    desc:'Ecology basics, food chains, populations, communities, habitat loss and conservation. Weeks 1 to 11.', sets:{}},
-  {id:'iot', title:'Internet of Things (IoT)', short:'IoT', live:false, cover:'assets/cover-iot.svg', tag:'Sensors · Networks · Embedded',
-   desc:'Sensors, protocols, edge computing and connected devices. Quizzes are on the way.'}
+  {id:'iot', title:'Introduction to Internet of Things', short:'IoT', live:true, count:8, qs:120, unit:'Week', prefix:'W', brief:true, cover:'assets/cover-iot.svg', tag:'Sensors · Networks · Embedded',
+   desc:'IoT basics, networking protocols, sensor networks, Arduino, Python, Raspberry Pi, SDN and cloud. Weeks 1 to 8.', sets:{}}
 ];
 window.addSet = (cid, n, obj) => { COURSES.find(c => c.id === cid).sets[n] = obj; };
 window.course = id => COURSES.find(c => c.id === id);

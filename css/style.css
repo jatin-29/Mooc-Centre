@@ -115,3 +115,6 @@ input[type=number]{font:inherit;padding:10px 12px;border-radius:12px;border:1.5p
 footer{color:var(--mut);font-size:13.5px;text-align:center;padding:30px 16px 50px}
 .katex-display{overflow-x:auto;overflow-y:hidden}.qtext .katex,.opt .katex{font-size:1.08em}
 @media(max-width:600px){.wrap{padding:0 14px}.qcard{padding:18px}.res{padding:20px}.modes{grid-template-columns:1fr}.qtext{font-size:17px}}
+.ref{margin-top:8px;font-size:13px;color:var(--mut)}
+.qtag.msq{margin-left:8px;background:var(--okbg);color:var(--ok)}
+.btn[disabled]{opacity:.45}
