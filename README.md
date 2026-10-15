@@ -18,4 +18,4 @@ Practice quizzes for MOOC assignments, with step-by-step solutions. Static site 
 3. Include the new data script in `course.html` and `quiz.html`.
 
 Math is rendered with KaTeX (vendored in `vendor/katex`).
-- **Coming soon:** Environment and Development, Forests and Their Management, Psychology of Learning, The Joy of Computing using Python, Understanding Incubation and Entrepreneurship.
+- **Environment and Development** (120), **Forests and Their Management** (136), **Psychology of Learning** (130), **The Joy of Computing using Python** (220, scenario/code based) and **Understanding Incubation and Entrepreneurship** (110) - with explanations.

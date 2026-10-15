@@ -7,16 +7,16 @@ window.COURSES = [
    desc:'Ecology basics, food chains, populations, communities, habitat loss and conservation. Weeks 1 to 12.', sets:{}},
   {id:'iot', title:'Introduction to Internet of Things', short:'IoT', live:true, count:12, qs:175, unit:'Week', prefix:'W', brief:true, cover:'assets/cover-iot.svg', tag:'Sensors · Networks · Embedded',
    desc:'IoT basics, networking protocols, sensor networks, Arduino, Python, Raspberry Pi, SDN and cloud. Weeks 1 to 12.', sets:{}},
-  {id:'envdev', title:'Environment and Development', short:'E&D', live:false, cover:'assets/cover-envdev.svg', tag:'Environment · Sustainability · Policy',
-   desc:'Environment, development and sustainability. Quizzes are on the way.'},
-  {id:'forests', title:'Forests and Their Management', short:'FTM', live:false, cover:'assets/cover-forests.svg', tag:'Forestry · Ecology · Management',
-   desc:'Forest ecosystems, silviculture and forest management. Quizzes are on the way.'},
-  {id:'psychology', title:'Psychology of Learning', short:'PoL', live:false, cover:'assets/cover-psychology.svg', tag:'Psychology · Learning · Behaviour',
-   desc:'How people learn: theories of learning, memory and motivation. Quizzes are on the way.'},
-  {id:'python', title:'The Joy of Computing using Python', short:'JoC', live:false, cover:'assets/cover-python.svg', tag:'Programming · Python · Problem solving',
-   desc:'Programming fundamentals and fun projects in Python. Quizzes are on the way.'},
-  {id:'startup', title:'Understanding Incubation and Entrepreneurship', short:'UIE', live:false, cover:'assets/cover-startup.svg', tag:'Startups · Incubation · Innovation',
-   desc:'Startups, incubation, business models and innovation. Quizzes are on the way.'}
+  {id:'envdev', title:'Environment and Development', short:'E&D', live:true, count:12, qs:120, unit:'Week', prefix:'W', brief:true, math:false, cover:'assets/cover-envdev.svg', tag:'Environment · Sustainability · Policy',
+   desc:'Sustainable development, environmental issues and policy. Weeks 1 to 12.', note:'Compiled from NPTEL assignment documents and accepted answers. Explanations are learning-oriented expansions, not quotes from the source.', sets:{}},
+  {id:'forests', title:'Forests and Their Management', short:'FTM', live:true, count:14, qs:136, pill:'Weeks 0-12 + Extra', unit:'Week', prefix:'W', brief:true, math:false, cover:'assets/cover-forests.svg', tag:'Forestry · Ecology · Management',
+   desc:'Forest ecosystems, silviculture and forest management. Weeks 0 to 12 plus extra questions.', note:'Based on the January-April 2026 question bank. Check the latest NPTEL/SWAYAM course page as questions and answers may change.', sets:{}},
+  {id:'psychology', title:'Psychology of Learning', short:'PoL', live:true, count:13, qs:130, pill:'12 weeks', unit:'Week', prefix:'W', brief:true, math:false, cover:'assets/cover-psychology.svg', tag:'Psychology · Learning · Behaviour',
+   desc:'How people learn: theories of learning, memory and motivation. Weeks 1 to 12.', note:'Week 7 has two different assignments (2025 and 2026). Practise both.', sets:{}},
+  {id:'python', title:'The Joy of Computing using Python', short:'JoC', live:true, count:11, qs:220, unit:'Week', prefix:'W', brief:true, math:false, cover:'assets/cover-python.svg', tag:'Programming · Python · Problem solving',
+   desc:'Programming fundamentals in Python with scenario and code-based questions. Weeks 1 to 11, 20 questions each.', note:'Many questions are scenario-based (read the scenario and any code first) and some are multiple-answer.', sets:{}},
+  {id:'startup', title:'Understanding Incubation and Entrepreneurship', short:'UIE', live:true, count:11, qs:110, unit:'Assignment', prefix:'A', brief:true, math:false, cover:'assets/cover-startup.svg', tag:'Startups · Incubation · Innovation',
+   desc:'Startups, incubation, business models and innovation. Assignments 1 to 11.', sets:{}}
 ];
 window.addSet = (cid, n, obj) => { COURSES.find(c => c.id === cid).sets[n] = obj; };
 window.course = id => COURSES.find(c => c.id === id);

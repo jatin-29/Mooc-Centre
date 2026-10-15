@@ -1,7 +1,7 @@
 const app = document.getElementById('app');
 const live = COURSES.filter(c => c.live), nQ = live.reduce((s,c)=>s+c.qs,0), nA = live.reduce((s,c)=>s+c.count,0);
 const card = c => c.live
- ? `<a class="ccard" href="course.html?c=${c.id}"><div class="cover"><img src="${c.cover}" alt=""><span class="badge"><i></i>Live</span></div><div class="body"><h3>${c.title}</h3><p>${c.desc}</p><div class="meta"><span class="pill">${c.count} ${c.unit.toLowerCase()}s</span><span class="pill">${c.qs} questions</span><span class="pill g">Combined quiz</span></div></div></a>`
+ ? `<a class="ccard" href="course.html?c=${c.id}"><div class="cover"><img src="${c.cover}" alt=""><span class="badge"><i></i>Live</span></div><div class="body"><h3>${c.title}</h3><p>${c.desc}</p><div class="meta"><span class="pill">${c.pill || (c.count+" "+c.unit.toLowerCase()+"s")}</span><span class="pill">${c.qs} questions</span><span class="pill g">Combined quiz</span></div></div></a>`
  : `<div class="ccard soon"><div class="cover"><img src="${c.cover}" alt=""><span class="badge soon"><i></i>Coming soon</span></div><div class="body"><h3>${c.title}</h3><p>${c.desc}</p><div class="meta"><span class="pill m">${c.tag}</span></div></div></div>`;
 app.innerHTML = `<section class="hero"><span class="eyebrow">&#9889; Free MOOC practice</span>
 <h1>Practice assignments.<br><em>Understand every step.</em></h1>

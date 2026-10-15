@@ -4,14 +4,16 @@ const c = course(P.get('c')), setId = P.get('set');
 const L = ['A','B','C','D','E'];
 if (!c || !c.live || (setId !== 'all' && !c.sets[setId])) { app.innerHTML = '<p>Quiz not found. <a href="index.html">Back</a></p>'; throw 0; }
 const isAll = setId === 'all';
-const title = isAll ? 'Combined quiz · all ' + c.unit.toLowerCase() + 's' : `${c.unit} ${setId} · ${c.sets[setId].title}`;
+const setName = n => c.sets[n].label || `${c.unit} ${n}`;
+const title = isAll ? 'Combined quiz · all ' + c.unit.toLowerCase() + 's' : setName(setId) + (c.sets[setId].title ? ' · ' + c.sets[setId].title : '');
+const tx = el => { if (c.math !== false) typeset(el); };
 let pool = [];
 Object.keys(c.sets).map(Number).sort((a,b)=>a-b).forEach(n => {
-  if (isAll || String(n) === setId) c.sets[n].questions.forEach((q,i) => pool.push({...q, tag:`${c.prefix}${n} Q${i+1}`}));
+  if (isAll || String(n) === setId) c.sets[n].questions.forEach((q,i) => pool.push({...q, tag:`${c.sets[n].tag||c.prefix+n} Q${i+1}`}));
 });
 let Q = [], ans = [], sub = [], cur = 0, mode = 'practice';
 const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
-const crumb = `<div class="crumb"><a href="index.html">Courses</a> / <a href="course.html?c=${c.id}">${c.short}</a> / ${isAll?'Combined':c.unit+' '+setId}</div>`;
+const crumb = `<div class="crumb"><a href="index.html">Courses</a> / <a href="course.html?c=${c.id}">${c.short}</a> / ${isAll?'Combined':setName(setId)}</div>`;
 const fig = q => q.img ? `<figure class="fig"><img src="${q.img}" alt="${(q.cap||'Figure').replace(/"/g,'')}">${q.cap?`<figcaption>${q.cap}</figcaption>`:''}</figure>` : '';
 /* answers: q.a is an index, or an array of indices for multiple-answer (MSQ) questions */
 const key = q => (Array.isArray(q.a) ? q.a : [q.a]).slice().sort((x,y)=>x-y);
@@ -73,7 +75,7 @@ function show() {
     if (un && !confirm(`${un} question(s) unanswered. Finish anyway?`)) return;
     results();
   };
-  typeset(app);
+  tx(app);
 }
 
 function results() {
@@ -89,6 +91,6 @@ function results() {
   return `<details class="rev"><summary><span class="st ${st}">${st==='ok'?'&#10003;':st==='no'?'&#10007;':'&ndash;'}</span><span class="q"><small style="color:var(--mut)">${q.tag}</small> ${q.q}</span></summary><div class="in">${fig(q)}<div class="qtext">${q.q}</div>
   ${q.o.map((o,j)=>`<div class="opt ${k.includes(j)?'right':''} ${p.includes(j)&&!k.includes(j)?'wrong':''}" style="cursor:default"><span class="l">${L[j]}</span><span>${o}</span></div>`).join('')}${sol(q)}</div></details>`; }).join('');
   document.getElementById('again').onclick = setup;
-  typeset(app); window.scrollTo(0,0);
+  tx(app); window.scrollTo(0,0);
 }
 setup();
