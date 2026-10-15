@@ -3,17 +3,17 @@ const P = new URLSearchParams(location.search);
 const c = course(P.get('c')), setId = P.get('set');
 const L = ['A','B','C','D','E'];
 if (!c || !c.live || (setId !== 'all' && !c.sets[setId])) { app.innerHTML = '<p>Quiz not found. <a href="index.html">Back</a></p>'; throw 0; }
-const isAll = setId === 'all';
+const isAll = setId === 'all', grp = P.get('grp');
 const setName = n => c.sets[n].label || `${c.unit} ${n}`;
-const title = isAll ? 'Combined quiz · all ' + c.unit.toLowerCase() + 's' : setName(setId) + (c.sets[setId].title ? ' · ' + c.sets[setId].title : '');
+const title = isAll ? (grp ? 'Combined quiz · ' + grp : 'Combined quiz · all ' + c.unit.toLowerCase() + 's') : setName(setId) + (c.sets[setId].title ? ' · ' + c.sets[setId].title : '');
 const tx = el => { if (c.math !== false) typeset(el); };
 let pool = [];
 Object.keys(c.sets).map(Number).sort((a,b)=>a-b).forEach(n => {
-  if (isAll || String(n) === setId) c.sets[n].questions.forEach((q,i) => pool.push({...q, tag:`${c.sets[n].tag||c.prefix+n} Q${i+1}`}));
+  if ((isAll && (c.sets[n].group || '') === (grp || '')) || String(n) === setId) c.sets[n].questions.forEach((q,i) => pool.push({...q, tag:`${c.sets[n].tag||c.prefix+n} Q${i+1}`}));
 });
 let Q = [], ans = [], sub = [], cur = 0, mode = 'practice';
 const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
-const crumb = `<div class="crumb"><a href="index.html">Courses</a> / <a href="course.html?c=${c.id}">${c.short}</a> / ${isAll?'Combined':setName(setId)}</div>`;
+const crumb = `<div class="crumb"><a href="index.html">Courses</a> / <a href="course.html?c=${c.id}">${c.short}</a> / ${isAll?(grp?'Combined '+grp:'Combined'):setName(setId)}</div>`;
 const fig = q => q.img ? `<figure class="fig"><img src="${q.img}" alt="${(q.cap||'Figure').replace(/"/g,'')}">${q.cap?`<figcaption>${q.cap}</figcaption>`:''}</figure>` : '';
 /* answers: q.a is an index, or an array of indices for multiple-answer (MSQ) questions */
 const key = q => (Array.isArray(q.a) ? q.a : [q.a]).slice().sort((x,y)=>x-y);
@@ -25,7 +25,7 @@ const revealed = i => mode === 'practice' && has(i) && (!multi(Q[i]) || sub[i]);
 const letters = q => key(q).map(i=>L[i]).join(', ');
 const answerText = q => key(q).map(i=>q.o[i]).join(' &nbsp;|&nbsp; ');
 const sol = q => c.brief
-  ? `<div class="sol"><h4>Explanation</h4><div>${q.s[0]}</div>${q.r?`<div class="ref">${q.r}</div>`:''}<div class="fin" style="margin-top:12px">Correct answer: ${letters(q)}. ${answerText(q)}</div></div>`
+  ? `<div class="sol">${q.s[0]?`<h4>Explanation</h4><div>${q.s[0]}</div>`:''}${q.r?`<div class="ref">${q.r}</div>`:''}<div class="fin" style="margin-top:12px">Correct answer: ${letters(q)}. ${answerText(q)}</div></div>`
   : `<div class="sol"><h4>Step-by-step solution</h4><ol>${q.s.map((s,i)=>`<li><span class="n">${i+1}</span><div class="t"><small>Step ${i+1}</small>${s}</div></li>`).join('')}</ol><div class="fin">Correct answer: ${letters(q)}. ${answerText(q)}</div></div>`;
 
 function setup() {
@@ -80,7 +80,7 @@ function show() {
 
 function results() {
   const score = Q.reduce((s,_,i)=>s+(correct(i)?1:0),0), skipped = Q.filter((_,i)=>!has(i)).length, pct = Math.round(score/Q.length*100);
-  const bk = 'best:'+c.id+':'+setId, b = ls.get(bk);
+  const bk = 'best:'+c.id+':'+setId+(grp?'-'+grp:''), b = ls.get(bk);
   if (!b || score/Q.length >= b.score/b.total) ls.set(bk,{score,total:Q.length});
   const msg = pct>=80?'Excellent work!':pct>=50?'Good effort. Review the solutions below.':'Keep practising. The solutions below will help.';
   app.innerHTML = `${crumb}<div class="res"><div class="ring" style="--p:${pct}"><div><span>${pct}%<small>${score}/${Q.length}</small></span></div></div>
