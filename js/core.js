@@ -6,7 +6,17 @@ window.COURSES = [
   {id:'wildlife', title:'Wildlife Ecology', short:'WE', live:true, count:12, qs:120, unit:'Week', prefix:'W', brief:true, cover:'assets/cover-wildlife.svg', tag:'Ecology · Conservation · Field methods',
    desc:'Ecology basics, food chains, populations, communities, habitat loss and conservation. Weeks 1 to 12.', sets:{}},
   {id:'iot', title:'Introduction to Internet of Things', short:'IoT', live:true, count:12, qs:175, unit:'Week', prefix:'W', brief:true, cover:'assets/cover-iot.svg', tag:'Sensors · Networks · Embedded',
-   desc:'IoT basics, networking protocols, sensor networks, Arduino, Python, Raspberry Pi, SDN and cloud. Weeks 1 to 12.', sets:{}}
+   desc:'IoT basics, networking protocols, sensor networks, Arduino, Python, Raspberry Pi, SDN and cloud. Weeks 1 to 12.', sets:{}},
+  {id:'envdev', title:'Environment and Development', short:'E&D', live:false, cover:'assets/cover-envdev.svg', tag:'Environment · Sustainability · Policy',
+   desc:'Environment, development and sustainability. Quizzes are on the way.'},
+  {id:'forests', title:'Forests and Their Management', short:'FTM', live:false, cover:'assets/cover-forests.svg', tag:'Forestry · Ecology · Management',
+   desc:'Forest ecosystems, silviculture and forest management. Quizzes are on the way.'},
+  {id:'psychology', title:'Psychology of Learning', short:'PoL', live:false, cover:'assets/cover-psychology.svg', tag:'Psychology · Learning · Behaviour',
+   desc:'How people learn: theories of learning, memory and motivation. Quizzes are on the way.'},
+  {id:'python', title:'The Joy of Computing using Python', short:'JoC', live:false, cover:'assets/cover-python.svg', tag:'Programming · Python · Problem solving',
+   desc:'Programming fundamentals and fun projects in Python. Quizzes are on the way.'},
+  {id:'startup', title:'Understanding Incubation and Entrepreneurship', short:'UIE', live:false, cover:'assets/cover-startup.svg', tag:'Startups · Incubation · Innovation',
+   desc:'Startups, incubation, business models and innovation. Quizzes are on the way.'}
 ];
 window.addSet = (cid, n, obj) => { COURSES.find(c => c.id === cid).sets[n] = obj; };
 window.course = id => COURSES.find(c => c.id === id);
