@@ -1,12 +1,12 @@
 window.R = String.raw;
 window.M = rows => '\\begin{bmatrix}' + rows.map(r => r.join('&')).join('\\\\') + '\\end{bmatrix}';
 window.COURSES = [
-  {id:'ala', title:'Applied Linear Algebra', short:'ALA', live:true, cover:'assets/cover-ala.svg', tag:'Mathematics · Signal Processing · ML',
+  {id:'ala', title:'Applied Linear Algebra', short:'ALA', live:true, count:11, qs:110, unit:'Assignment', prefix:'A', cover:'assets/cover-ala.svg', tag:'Mathematics · Signal Processing · ML',
    desc:'Vectors, matrices, SVD, LMMSE, MIMO/OFDM, PCA and sparse recovery. All 11 weekly assignments.', sets:{}},
+  {id:'wildlife', title:'Wildlife Ecology', short:'WE', live:true, count:11, qs:110, unit:'Week', prefix:'W', brief:true, cover:'assets/cover-wildlife.svg', tag:'Ecology · Conservation · Field methods',
+   desc:'Ecology basics, food chains, populations, communities, habitat loss and conservation. Weeks 1 to 11.', sets:{}},
   {id:'iot', title:'Internet of Things (IoT)', short:'IoT', live:false, cover:'assets/cover-iot.svg', tag:'Sensors · Networks · Embedded',
-   desc:'Sensors, protocols, edge computing and connected devices. Quizzes are on the way.'},
-  {id:'wildlife', title:'Wildlife Ecology', short:'WE', live:false, cover:'assets/cover-wildlife.svg', tag:'Ecology · Conservation · Field methods',
-   desc:'Populations, habitats, biodiversity and conservation. Quizzes are on the way.'}
+   desc:'Sensors, protocols, edge computing and connected devices. Quizzes are on the way.'}
 ];
 window.addSet = (cid, n, obj) => { COURSES.find(c => c.id === cid).sets[n] = obj; };
 window.course = id => COURSES.find(c => c.id === id);

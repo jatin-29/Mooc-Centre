@@ -4,16 +4,16 @@ const c = course(P.get('c')), setId = P.get('set');
 const L = ['A','B','C','D'];
 if (!c || !c.live || (setId !== 'all' && !c.sets[setId])) { app.innerHTML = '<p>Quiz not found. <a href="index.html">Back</a></p>'; throw 0; }
 const isAll = setId === 'all';
-const title = isAll ? 'Combined quiz · all assignments' : `Assignment ${setId} · ${c.sets[setId].title}`;
+const title = isAll ? 'Combined quiz · all '+c.unit.toLowerCase()+'s' : `${c.unit} ${setId} · ${c.sets[setId].title}`;
 let pool = [];
 Object.keys(c.sets).map(Number).sort((a,b)=>a-b).forEach(n => {
-  if (isAll || String(n) === setId) c.sets[n].questions.forEach((q,i) => pool.push({...q, tag:`A${n} Q${i+1}`}));
+  if (isAll || String(n) === setId) c.sets[n].questions.forEach((q,i) => pool.push({...q, tag:`${c.prefix}${n} Q${i+1}`}));
 });
 let Q = [], ans = [], cur = 0, mode = 'practice';
 const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
-const crumb = `<div class="crumb"><a href="index.html">Courses</a> / <a href="course.html?c=${c.id}">${c.short}</a> / ${isAll?'Combined':'Assignment '+setId}</div>`;
+const crumb = `<div class="crumb"><a href="index.html">Courses</a> / <a href="course.html?c=${c.id}">${c.short}</a> / ${isAll?'Combined':c.unit+' '+setId}</div>`;
 const fig = q => q.img ? `<figure class="fig"><img src="${q.img}" alt="${(q.cap||'Figure').replace(/"/g,'')}">${q.cap?`<figcaption>${q.cap}</figcaption>`:''}</figure>` : '';
-const sol = q => `<div class="sol"><h4>Step-by-step solution</h4><ol>${q.s.map((s,i)=>`<li><span class="n">${i+1}</span><div class="t"><small>Step ${i+1}</small>${s}</div></li>`).join('')}</ol><div class="fin">Correct answer: ${L[q.a]}. ${q.o[q.a]}</div></div>`;
+const sol = q => c.brief ? `<div class="sol"><h4>Explanation</h4><div>${q.s[0]}</div><div class="fin" style="margin-top:12px">Correct answer: ${L[q.a]}. ${q.o[q.a]}</div></div>` : `<div class="sol"><h4>Step-by-step solution</h4><ol>${q.s.map((s,i)=>`<li><span class="n">${i+1}</span><div class="t"><small>Step ${i+1}</small>${s}</div></li>`).join('')}</ol><div class="fin">Correct answer: ${L[q.a]}. ${q.o[q.a]}</div></div>`;
 
 function setup() {
   let m = 'practice';
