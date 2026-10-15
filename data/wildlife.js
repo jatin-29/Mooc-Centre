@@ -132,4 +132,16 @@ W(11,'Harvesting, restoration and ecotoxicology',[
 ["What is a major risk of introducing predators for pest control?",["The pest always becomes extinct immediately","The predator cannot reproduce under any condition","The predator reduces rainfall","The introduced predator may itself become a pest"],3,"The introduced predator can become an invasive pest itself."],
 ["Ecotoxicology studies toxic chemicals mainly at which broader levels?",["Individual atoms and molecules only","Population, community, ecosystem, and biosphere levels","Market demand and harvesting cost only","Crop yield and storage levels only"],1,"Ecotoxicology looks at effects on populations, communities, ecosystems and the biosphere."]
 ]);
+W(12,'Revision: mixed topics',[
+["In cave formations, the deposits growing downward from the roof are called?",["Stalagmites","Columns","Stalactites","Sediment bars"],2,"Stalactites hang from the roof; stalagmites grow up from the floor."],
+["Which of these is a deterministic factor?",["environmental variation","forest fire","death rate","diseases"],2,"Death rate acts predictably; the others are random (stochastic) events."],
+["An ecological interaction in which both participating organisms are harmed is called",["mutualism","commensalism","competition","neutralism"],2,"Competition is a (−/−) interaction that harms both organisms."],
+["Ecology is the scientific study of ______ that determine the distribution and abundance of organisms. (Fill in the blanks)",["statics","interactions","dynamics","habitat"],1,"Ecology studies the interactions that decide where organisms live and how many there are."],
+["Mesodebris in the context of plastic debris has fragments of size",["&gt; 20 mm","5 - 20 mm","&lt; 5 mm","&lt; 1 mm"],1,"Mesodebris is 5 to 20 mm."],
+["Which level is formed when similar cells and their extracellular matrix from the same origin together perform a specific function?",["Organ","Tissue","Organ system","Population"],1,"Similar cells plus their matrix performing one function form a tissue."],
+["Secondary succession refers to succession that occurs",["On newly exposed rock or sand surfaces","In a saline body such as a marsh","After severe disturbance or removal of a pre-existing community","Only when climate controls the final community"],2,"Secondary succession restarts on existing soil after a community is removed."],
+["A group of organs working together to perform one or more functions is called?",["Tissue","Organ","Organism","Organ system"],3,"Organs working together form an organ system."],
+["After a forest fire, an incompletely destroyed forest develops through herbaceous, shrub and woodland stages toward a stable stage. This is best described as?",["Secondary succession","Climatic climax","Bioaccumulation","Species-area effect"],0,"Regrowth through herb, shrub and woodland stages after disturbance is secondary succession."],
+["If organisms already present in an area change the soil conditions and thereby drive further community change, the succession is?",["Allogenic succession","Autogenic succession","Catastrophic succession","Seasonal succession"],1,"Change driven by the resident organisms themselves is autogenic succession."]
+]);
 })();
