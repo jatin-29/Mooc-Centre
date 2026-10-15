@@ -1,6 +1,6 @@
 (function(){const R=String.raw;
 addSet('ala',5,{title:'Eigenvalues, null space, pseudo-inverse, regression vs classification',questions:[
-{q:R`Predicting a continuous output (for example house price) by fitting a curve through data points is a problem of`,
+{img:'assets/ala/a5q1.svg',cap:'Data points with a fitted line (redrawn).',q:R`The picture shown (a line fitted through data to predict a continuous output such as house price) corresponds to`,
  o:[R`Regression`,R`Classification`,R`Clustering`,R`Dimensionality reduction`],a:0,
  s:[R`The target (price) is a continuous real number.`,R`Predicting a continuous value from features is regression; classification would predict a discrete label.`]},
 {q:R`With $h_1=1+j$, $h_2=-1-j$, the effective channel row $[h_1,\ h_2,\ h_2^*,\ -h_1^*]$ is`,
@@ -27,7 +27,7 @@ addSet('ala',5,{title:'Eigenvalues, null space, pseudo-inverse, regression vs cl
 {q:R`The eigenvalues $\lambda$ of $\mathbf A$ are the solutions of`,
  o:[R`$\det(\mathbf A-\lambda\mathbf I)=0$`,R`$\mathbf A^T\mathbf A-\lambda\mathbf I=\mathbf 0$`,R`$\det(\lambda\mathbf A-\mathbf I)=0$`,R`$\mathrm{trace}(\mathbf A-\lambda\mathbf I)=0$`],a:0,
  s:[R`$\mathbf A\mathbf v=\lambda\mathbf v\iff(\mathbf A-\lambda\mathbf I)\mathbf v=\mathbf 0$ with $\mathbf v\neq\mathbf 0$.`,R`A non-zero solution exists only if $\mathbf A-\lambda\mathbf I$ is singular: $\det(\mathbf A-\lambda\mathbf I)=0$ (the characteristic equation).`]},
-{q:R`Separating emails into two groups, "spam" and "not spam", by learning a boundary between the data is a problem of`,
+{img:'assets/ala/a5q10.svg',cap:'Two groups separated by a decision boundary (redrawn).',q:R`The picture shown (two groups of points separated by a decision boundary) corresponds to`,
  o:[R`Regression`,R`Classification`,R`Clustering`,R`Compression`],a:1,
  s:[R`The output is a discrete label (spam / not spam).`,R`Assigning discrete labels from features is classification.`]}
 ]});})();

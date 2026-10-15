@@ -1,11 +1,13 @@
 const app = document.getElementById('app');
 const c = course(new URLSearchParams(location.search).get('c'));
-if (!c || !c.live) { app.innerHTML = '<p>Course not found. <a href="index.html">Back</a></p>'; }
+if (!c || !c.live) { app.innerHTML = '<p>Course not found. <a href="index.html">Back to courses</a></p>'; }
 else {
   const ns = Object.keys(c.sets).map(Number).sort((a,b)=>a-b);
   const total = ns.reduce((s,n)=>s+c.sets[n].questions.length,0);
-  const best = k => { const b = ls.get('best:'+c.id+':'+k); return b ? `<span class="tag best">Best ${b.score}/${b.total}</span>` : ''; };
-  app.innerHTML = `<p><a href="index.html">&larr; All courses</a></p><h1>${c.title}</h1><p class="sub">${c.desc}</p>
-  <a class="card" style="border-color:var(--pri)" href="quiz.html?c=${c.id}&set=all"><h3>Combined quiz - all ${ns.length} assignments</h3><p>${total} questions. Choose how many, shuffle, practice or test mode.</p>${best('all')}</a>
-  <h2>Assignments</h2><div class="grid">` + ns.map(n => `<a class="card" href="quiz.html?c=${c.id}&set=${n}"><h3>Assignment ${n}</h3><p>${c.sets[n].title}</p><span class="tag">${c.sets[n].questions.length} questions</span> ${best(n)}</a>`).join('') + `</div>`;
+  const best = k => { const b = ls.get('best:'+c.id+':'+k); return b ? `<span class="pill g">Best ${b.score}/${b.total}</span>` : '<span>Not attempted</span>'; };
+  app.innerHTML = `<div class="crumb"><a href="index.html">Courses</a> / ${c.short}</div>
+  <div class="banner"><img src="${c.cover}" alt=""><div class="in"><h1>${c.title}</h1><p>${c.desc}</p></div></div>
+  <div class="feature"><div><h3>Combined quiz: all ${ns.length} assignments</h3><p>${total} questions. Choose how many, shuffle them, practice or test.</p></div><a class="btn" href="quiz.html?c=${c.id}&set=all">Start combined quiz &rarr;</a></div>
+  <h2 class="sec">Assignments <small>${ns.length} weekly quizzes</small></h2>
+  <div class="tiles">${ns.map(n => `<a class="tile" href="quiz.html?c=${c.id}&set=${n}"><span class="num">${n}</span><h4>Assignment ${n}</h4><p>${c.sets[n].title}</p><div class="foot"><span>${c.sets[n].questions.length} questions</span>${best(n)}</div></a>`).join('')}</div>`;
 }

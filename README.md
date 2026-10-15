@@ -4,6 +4,7 @@ Practice quizzes for MOOC assignments, with step-by-step solutions. Static site 
 
 ## Courses
 - **Applied Linear Algebra (ALA)** - Assignments 1-11 (10 MCQs each) plus a combined 110-question quiz.
+- **Internet of Things (IoT)** and **Wildlife Ecology** - coming soon.
 
 ## Features
 - Practice mode (instant feedback + Step 1, Step 2... solution) and Test mode (submit, then review)
