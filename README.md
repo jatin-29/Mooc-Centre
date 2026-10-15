@@ -10,7 +10,6 @@ Practice quizzes for MOOC assignments, with step-by-step solutions. Static site 
 - Practice mode (instant feedback + Step 1, Step 2... solution) and Test mode (submit, then review)
 - Combined quiz with question count + shuffle
 - Best score saved in the browser
-- "Ask a doubt" button opens a prefilled GitHub issue
 
 ## Adding a course / assignment
 1. Add the course in `js/core.js` (`COURSES`).

@@ -1,6 +1,5 @@
 window.R = String.raw;
 window.M = rows => '\\begin{bmatrix}' + rows.map(r => r.join('&')).join('\\\\') + '\\end{bmatrix}';
-window.REPO = 'jatin-29/Mooc-Centre';
 window.COURSES = [
   {id:'ala', title:'Applied Linear Algebra', short:'ALA', live:true, cover:'assets/cover-ala.svg', tag:'Mathematics · Signal Processing · ML',
    desc:'Vectors, matrices, SVD, LMMSE, MIMO/OFDM, PCA and sparse recovery. All 11 weekly assignments.', sets:{}},
@@ -20,6 +19,6 @@ window.typeset = el => {
 };
 window.shell = () => {
   document.body.insertAdjacentHTML('afterbegin', `<header class="nav"><div class="wrap"><a class="brand" href="index.html"><span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-5 9 5-9 5-9-5z"/><path d="M7 12v4c0 1.5 2.2 3 5 3s5-1.5 5-3v-4"/></svg></span>MOOC Centre</a><a class="lnk" href="index.html#courses">Courses</a></div></header>`);
-  document.body.insertAdjacentHTML('beforeend', `<footer>MOOC Centre · Practice quizzes with step-by-step solutions. Spotted a mistake or have a doubt? Use <b>Ask a doubt</b> on any question.</footer>`);
+  document.body.insertAdjacentHTML('beforeend', `<footer>MOOC Centre · Practice quizzes with step-by-step solutions.</footer>`);
 };
 shell();

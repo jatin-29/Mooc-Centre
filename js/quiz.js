@@ -11,7 +11,6 @@ Object.keys(c.sets).map(Number).sort((a,b)=>a-b).forEach(n => {
 });
 let Q = [], ans = [], cur = 0, mode = 'practice';
 const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
-const doubt = q => `https://github.com/${REPO}/issues/new?title=${encodeURIComponent('Doubt: '+c.short+' '+q.tag)}&body=${encodeURIComponent('Course: '+c.title+'\nQuestion: '+q.tag+'\n\nMy doubt:\n')}`;
 const crumb = `<div class="crumb"><a href="index.html">Courses</a> / <a href="course.html?c=${c.id}">${c.short}</a> / ${isAll?'Combined':'Assignment '+setId}</div>`;
 const fig = q => q.img ? `<figure class="fig"><img src="${q.img}" alt="${(q.cap||'Figure').replace(/"/g,'')}">${q.cap?`<figcaption>${q.cap}</figcaption>`:''}</figure>` : '';
 const sol = q => `<div class="sol"><h4>Step-by-step solution</h4><ol>${q.s.map((s,i)=>`<li><span class="n">${i+1}</span><div class="t"><small>Step ${i+1}</small>${s}</div></li>`).join('')}</ol><div class="fin">Correct answer: ${L[q.a]}. ${q.o[q.a]}</div></div>`;
@@ -47,7 +46,7 @@ function show() {
   ${q.o.map((o,i)=>`<button class="opt ${a===i&&!reveal?'sel':''} ${reveal&&i===q.a?'right':''} ${reveal&&a===i&&i!==q.a?'wrong':''}" data-o="${i}" ${reveal?'disabled':''}><span class="l">${L[i]}</span><span>${o}</span></button>`).join('')}
   ${reveal ? `<div class="verdict ${a===q.a?'ok':'no'}">${a===q.a?'&#10003; Correct! Well done.':'&#10007; Not quite. You chose '+L[a]+'. See the solution below.'}</div>${sol(q)}` : ''}</div>
   <div class="nav2"><button class="btn ghost" id="prev" ${cur===0?'disabled':''}>&larr; Previous</button>${cur<Q.length-1?'<button class="btn" id="next">Next &rarr;</button>':''}
-  <span class="sp"></span><a class="btn ghost" target="_blank" rel="noopener" href="${doubt(q)}">Ask a doubt</a><button class="btn ghost" id="fin">${mode==='test'?'Submit test':'Finish'}</button></div>`;
+  <span class="sp"></span><button class="btn ghost" id="fin">${mode==='test'?'Submit test':'Finish'}</button></div>`;
   app.querySelectorAll('.opt').forEach(b => b.onclick = () => { ans[cur] = +b.dataset.o; show(); });
   app.querySelectorAll('.dot').forEach(b => b.onclick = () => { cur = +b.dataset.i; show(); });
   const p = document.getElementById('prev'); if (p) p.onclick = () => { cur--; show(); };
@@ -71,8 +70,7 @@ function results() {
   <h2 class="sec">Review with solutions</h2>` +
   Q.map((q,i)=>{ const k = ans[i]==null?'sk':ans[i]===q.a?'ok':'no';
   return `<details class="rev"><summary><span class="st ${k}">${k==='ok'?'&#10003;':k==='no'?'&#10007;':'&ndash;'}</span><span class="q"><small style="color:var(--mut)">${q.tag}</small> ${q.q}</span></summary><div class="in">${fig(q)}<div class="qtext">${q.q}</div>
-  ${q.o.map((o,j)=>`<div class="opt ${j===q.a?'right':''} ${ans[i]===j&&j!==q.a?'wrong':''}" style="cursor:default"><span class="l">${L[j]}</span><span>${o}</span></div>`).join('')}${sol(q)}
-  <p><a target="_blank" rel="noopener" href="${doubt(q)}">Ask a doubt about this question</a></p></div></details>`; }).join('');
+  ${q.o.map((o,j)=>`<div class="opt ${j===q.a?'right':''} ${ans[i]===j&&j!==q.a?'wrong':''}" style="cursor:default"><span class="l">${L[j]}</span><span>${o}</span></div>`).join('')}${sol(q)}</div></details>`; }).join('');
   document.getElementById('again').onclick = setup;
   typeset(app); window.scrollTo(0,0);
 }
