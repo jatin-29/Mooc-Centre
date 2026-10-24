@@ -13,6 +13,7 @@ Object.keys(c.sets).map(Number).sort((a,b)=>a-b).forEach(n => {
 });
 let Q = [], ans = [], sub = [], cur = 0, mode = 'practice';
 const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+const setNote = (!isAll && c.sets[setId].note) ? `<div class="notice" style="margin:0 0 14px">${c.sets[setId].note}</div>` : '';
 const crumb = `<div class="crumb"><a href="index.html">Courses</a> / <a href="course.html?c=${c.id}">${c.short}</a> / ${isAll?(grp?'Combined '+grp:'Combined'):setName(setId)}</div>`;
 const fig = q => q.img ? `<figure class="fig"><img src="${q.img}" alt="${(q.cap||'Figure').replace(/"/g,'')}">${q.cap?`<figcaption>${q.cap}</figcaption>`:''}</figure>` : '';
 /* answers: q.a is an index, or an array of indices for multiple-answer (MSQ) questions */
@@ -31,7 +32,7 @@ const sol = q => c.brief
 function setup() {
   let m = 'practice';
   app.innerHTML = `${crumb}<div class="setup"><div class="qcard"><span class="qtag">${isAll?pool.length+' questions':pool.length+' questions'}</span><h1 style="margin-top:12px">${title}</h1>
-  <p style="color:var(--mut);margin:6px 0 0">Choose how you want to attempt this quiz.</p>
+  <p style="color:var(--mut);margin:6px 0 14px">Choose how you want to attempt this quiz.</p>${setNote}
   <div class="modes"><button class="mode on" data-m="practice"><b>Practice</b><span>Instant feedback with the solution after each answer.</span></button><button class="mode" data-m="test"><b>Test</b><span>Answer everything, submit, then review all solutions.</span></button></div>
   ${isAll ? `<div class="field"><label for="n">Number of questions (max ${pool.length})</label><input type="number" id="n" min="1" max="${pool.length}" value="${pool.length}"></div><div class="field"><label class="chk"><input type="checkbox" id="sh" checked> Shuffle questions</label></div>` : ''}
   <button class="btn" id="go">Start quiz &rarr;</button></div></div>`;
@@ -55,7 +56,7 @@ function show() {
   const answered = Q.filter((_,i)=>has(i)).length;
   app.innerHTML = `${crumb}<div class="qhead"><h1>${title}</h1><div class="qinfo"><span>Question ${cur+1} of ${Q.length}</span><span>${answered} answered &middot; ${mode==='test'?'Test':'Practice'} mode</span></div>
   <div class="bar"><i style="width:${(cur+1)/Q.length*100}%"></i></div><div class="dots">${Q.map((_,i)=>`<button class="${dotCls(i)}" data-i="${i}">${i+1}</button>`).join('')}</div></div>
-  <div class="qcard"><span class="qtag">${q.tag}</span>${mq?'<span class="qtag msq">Select all that apply</span>':''}${fig(q)}<div class="qtext">${q.q}</div>
+  ${setNote}<div class="qcard"><span class="qtag">${q.tag}</span>${mq?'<span class="qtag msq">Select all that apply</span>':''}${fig(q)}<div class="qtext">${q.q}</div>
   ${q.o.map((o,i)=>`<button class="opt ${p.includes(i)&&!rev?'sel':''} ${rev&&k.includes(i)?'right':''} ${rev&&p.includes(i)&&!k.includes(i)?'wrong':''}" data-o="${i}" ${rev?'disabled':''}><span class="l">${L[i]}</span><span>${o}</span></button>`).join('')}
   ${mq && mode==='practice' && !rev ? `<button class="btn" id="chk" style="margin-top:6px" ${p.length?'':'disabled'}>Check answer</button>` : ''}
   ${rev ? `<div class="verdict ${correct(cur)?'ok':'no'}">${correct(cur)?'&#10003; Correct! Well done.':'&#10007; Not quite. See the solution below.'}</div>${sol(q)}` : ''}</div>
