@@ -9,7 +9,7 @@ const title = isAll ? (grp ? 'Combined quiz · ' + grp : 'Combined quiz · all '
 const tx = el => { if (c.math !== false) typeset(el); };
 let pool = [];
 Object.keys(c.sets).map(Number).sort((a,b)=>a-b).forEach(n => {
-  if ((isAll && ((c.sets[n].group || '') === (grp || '') || (!grp && c.sets[n].inCombined))) || String(n) === setId) c.sets[n].questions.forEach((q,i) => pool.push({...q, tag:`${c.sets[n].tag||c.prefix+n} Q${i+1}`}));
+  if ((isAll && ((c.sets[n].group || '') === (grp || '') || (!grp && c.sets[n].inCombined))) || String(n) === setId) c.sets[n].questions.forEach((q,i) => pool.push({...q, tag:`${c.sets[n].tag||c.prefix+n} Q${i+1}`, _extra: !!c.sets[n].inCombined}));
 });
 let Q = [], ans = [], sub = [], cur = 0, mode = 'practice';
 const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
@@ -40,15 +40,21 @@ const sol = q => c.brief
 
 function setup() {
   let m = 'practice';
-  app.innerHTML = `${crumb}<div class="setup"><div class="qcard"><span class="qtag">${isAll?pool.length+' questions':pool.length+' questions'}</span><h1 style="margin-top:12px">${title}</h1>
+  const extraN = pool.filter(x => x._extra).length;
+  const active = () => { const e = document.getElementById('ex'); return e && !e.checked ? pool.filter(x => !x._extra) : pool; };
+  app.innerHTML = `${crumb}<div class="setup"><div class="qcard"><span class="qtag" id="cnt">${pool.length} questions</span><h1 style="margin-top:12px">${title}</h1>
   <p style="color:var(--mut);margin:6px 0 14px">Choose how you want to attempt this quiz.</p>${setNote}
   <div class="modes"><button class="mode on" data-m="practice"><b>Practice</b><span>Instant feedback with the solution after each answer.</span></button><button class="mode" data-m="test"><b>Test</b><span>Answer everything, submit, then review all solutions.</span></button></div>
-  ${isAll ? `<div class="field"><label for="n">Number of questions (max ${pool.length})</label><input type="number" id="n" min="1" max="${pool.length}" value="${pool.length}"></div><div class="field"><label class="chk"><input type="checkbox" id="sh" checked> Shuffle questions</label></div>` : ''}
+  ${isAll && extraN ? `<div class="field"><label class="chk"><input type="checkbox" id="ex" checked> Include the ${extraN} extra practice questions</label><div style="color:var(--mut);font-size:13.5px;margin-top:4px">Untick to practise only the ${pool.length - extraN} weekly assignment questions.</div></div>` : ''}
+  ${isAll ? `<div class="field"><label for="n" id="nlab">Number of questions (max ${pool.length})</label><input type="number" id="n" min="1" max="${pool.length}" value="${pool.length}"></div><div class="field"><label class="chk"><input type="checkbox" id="sh" checked> Shuffle questions</label></div>` : ''}
   <button class="btn" id="go">Start quiz &rarr;</button></div></div>`;
   app.querySelectorAll('.mode').forEach(b => b.onclick = () => { m = b.dataset.m; app.querySelectorAll('.mode').forEach(x => x.classList.toggle('on', x === b)); });
+  const ex = document.getElementById('ex');
+  if (ex) ex.onchange = () => { const k = active().length, n = document.getElementById('n');
+    n.max = k; n.value = k; document.getElementById('nlab').textContent = `Number of questions (max ${k})`; document.getElementById('cnt').textContent = `${k} questions`; };
   document.getElementById('go').onclick = () => {
-    mode = m; let q = pool;
-    if (isAll) { if (document.getElementById('sh').checked) q = shuffle(pool); q = q.slice(0, Math.max(1, Math.min(pool.length, +document.getElementById('n').value || pool.length))); }
+    mode = m; const base = active(); let q = base;
+    if (isAll) { if (document.getElementById('sh').checked) q = shuffle(base); q = q.slice(0, Math.max(1, Math.min(base.length, +document.getElementById('n').value || base.length))); }
     const done = ls.get(attemptKey) || 0; ls.set(attemptKey, done + 1);
     if (c.shuffleRetry && done > 0) { q = shuffle(q).map(shuffleOptions); }
     Q = q; ans = Q.map(() => null); sub = Q.map(() => false); cur = 0; show();
