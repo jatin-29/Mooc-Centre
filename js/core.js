@@ -3,7 +3,7 @@ window.M = rows => '\\begin{bmatrix}' + rows.map(r => r.join('&')).join('\\\\') 
 window.COURSES = [
   {id:'ala', title:'Applied Linear Algebra', short:'ALA', live:true, count:11, qs:110, unit:'Assignment', prefix:'A', cover:'assets/cover-ala.svg', tag:'Mathematics · Signal Processing · ML',
    desc:'Vectors, matrices, SVD, LMMSE, MIMO/OFDM, PCA and sparse recovery. All 11 weekly assignments.', sets:{}},
-  {id:'wildlife', title:'Wildlife Ecology', short:'WE', live:true, count:13, qs:131, pill:'12 weeks + 11 extra', unit:'Week', prefix:'W', brief:true, cover:'assets/cover-wildlife.svg', tag:'Ecology · Conservation · Field methods',
+  {id:'wildlife', title:'Wildlife Ecology', short:'WE', live:true, count:13, qs:147, pill:'12 weeks + 27 extra', unit:'Week', prefix:'W', brief:true, cover:'assets/cover-wildlife.svg', tag:'Ecology · Conservation · Field methods',
    desc:'Ecology basics, food chains, populations, communities, habitat loss and conservation. Weeks 1 to 12.', sets:{}},
   {id:'iot', title:'Introduction to Internet of Things', short:'IoT', live:true, count:61, qs:905, pill:'12 weeks + 4 previous years', unit:'Week', prefix:'W', brief:true, cover:'assets/cover-iot.svg', tag:'Sensors · Networks · Embedded',
    desc:'IoT basics, networking protocols, sensor networks, Arduino, Python, Raspberry Pi, SDN and cloud. Weeks 1 to 12, plus previous-year papers (2022-2025).', sets:{}},

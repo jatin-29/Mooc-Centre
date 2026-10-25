@@ -9,7 +9,7 @@ const title = isAll ? (grp ? 'Combined quiz · ' + grp : 'Combined quiz · all '
 const tx = el => { if (c.math !== false) typeset(el); };
 let pool = [];
 Object.keys(c.sets).map(Number).sort((a,b)=>a-b).forEach(n => {
-  if ((isAll && (c.sets[n].group || '') === (grp || '')) || String(n) === setId) c.sets[n].questions.forEach((q,i) => pool.push({...q, tag:`${c.sets[n].tag||c.prefix+n} Q${i+1}`}));
+  if ((isAll && ((c.sets[n].group || '') === (grp || '') || (!grp && c.sets[n].inCombined))) || String(n) === setId) c.sets[n].questions.forEach((q,i) => pool.push({...q, tag:`${c.sets[n].tag||c.prefix+n} Q${i+1}`}));
 });
 let Q = [], ans = [], sub = [], cur = 0, mode = 'practice';
 const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };

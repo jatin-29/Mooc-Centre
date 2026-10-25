@@ -4,7 +4,7 @@ Practice quizzes for MOOC assignments, with step-by-step solutions. Static site 
 
 ## Courses
 - **Applied Linear Algebra (ALA)** - Assignments 1-11 (10 MCQs each) plus a combined 110-question quiz.
-- **Wildlife Ecology** - Weeks 1-12 (120 questions, one-line explanations) plus an "Extra practice" set of 11 questions and a combined quiz.
+- **Wildlife Ecology** - Weeks 1-12 (120 questions, one-line explanations) plus an "Extra practice" set of 27 more questions (Week 13) and a combined 147-question quiz.
 - **Introduction to Internet of Things** - Weeks 1-12 (180 questions, includes multiple-answer questions) plus a combined quiz.
 
 ## Features
