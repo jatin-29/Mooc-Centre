@@ -14,6 +14,15 @@ Object.keys(c.sets).map(Number).sort((a,b)=>a-b).forEach(n => {
 let Q = [], ans = [], sub = [], cur = 0, mode = 'practice';
 const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
 const setNote = (!isAll && c.sets[setId].note) ? `<div class="notice" style="margin:0 0 14px">${c.sets[setId].note}</div>` : '';
+/* Wildlife Ecology: re-attempts shuffle the questions and the options. Options that depend on position ("a or b", "All of the above", "None of these"...) keep their order. */
+const posDependent = q => q.o.some(o => /\b(all|none|neither|both)\b[^.]{0,20}\b(these|above)\b|\([a-e]\)|^\s*[a-e]\s+or\s+[a-e]\s*$/i.test(o.replace(/<[^>]+>/g, ' ')));
+const shuffleOptions = q => {
+  if (posDependent(q)) return q;
+  const perm = shuffle(q.o.map((_, i) => i)), k = Array.isArray(q.a) ? q.a : [q.a];
+  const a = k.map(x => perm.indexOf(x));
+  return {...q, o: perm.map(i => q.o[i]), a: Array.isArray(q.a) ? a.sort((x, y) => x - y) : a[0]};
+};
+const attemptKey = 'att:' + c.id + ':' + setId + (grp ? '-' + grp : '');
 const crumb = `<div class="crumb"><a href="index.html">Courses</a> / <a href="course.html?c=${c.id}">${c.short}</a> / ${isAll?(grp?'Combined '+grp:'Combined'):setName(setId)}</div>`;
 const fig = q => q.img ? `<figure class="fig"><img src="${q.img}" alt="${(q.cap||'Figure').replace(/"/g,'')}">${q.cap?`<figcaption>${q.cap}</figcaption>`:''}</figure>` : '';
 /* answers: q.a is an index, or an array of indices for multiple-answer (MSQ) questions */
@@ -40,6 +49,8 @@ function setup() {
   document.getElementById('go').onclick = () => {
     mode = m; let q = pool;
     if (isAll) { if (document.getElementById('sh').checked) q = shuffle(pool); q = q.slice(0, Math.max(1, Math.min(pool.length, +document.getElementById('n').value || pool.length))); }
+    const done = ls.get(attemptKey) || 0; ls.set(attemptKey, done + 1);
+    if (c.shuffleRetry && done > 0) { q = shuffle(q).map(shuffleOptions); }
     Q = q; ans = Q.map(() => null); sub = Q.map(() => false); cur = 0; show();
   };
   window.scrollTo(0,0);
